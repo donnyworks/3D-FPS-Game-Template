@@ -10,7 +10,7 @@ config_version=5
 
 [application]
 
-config/name="3D basic FPS controller"
+config/name="3D basic FPS controller (LATEST)"
 run/main_scene="uid://wckhfteja77a"
 config/features=PackedStringArray("4.5", "GL Compatibility")
 config/icon="res://icon.svg"
