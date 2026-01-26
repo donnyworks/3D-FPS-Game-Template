@@ -10,6 +10,16 @@ extends CharacterBody3D
 var SPEED = DEFAULT_SPEED
 
 func _ready():
+	if GlobalScope.player_position != Vector3.ZERO:
+		rotation = GlobalScope.player_rotation
+		velocity = GlobalScope.player_velocity
+		accel_velocity = GlobalScope.player_accel
+		accel_status = GlobalScope.accel_status
+		friction_status = GlobalScope.friction_status
+		ideal_by = GlobalScope.player_by
+		ideal_cx = GlobalScope.player_cx
+		SPEED = GlobalScope.player_speed
+		$Camera3D.rotation = GlobalScope.player_camera_rotation
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
 var ideal_cx = 0.0
@@ -47,6 +57,7 @@ func _physics_process(delta: float) -> void:
 	# Handle jump.
 	if Input.is_action_just_pressed("jump") and is_on_floor():
 		SPEED += MIDAIR_SPEED
+		friction_status = 0.0
 		velocity.y = JUMP_VELOCITY # Scratch that, the reason bhopping is so elegant is BECAUSE the jumps mean larger strides
 		#velocity.y = (JUMP_VELOCITY + 1.0) - SPEED/5 # the reason for the +1 is because jump_velocity is normal while you're at normal speed, and then...
 	elif is_on_floor() and (not Input.is_action_just_pressed("jump")):

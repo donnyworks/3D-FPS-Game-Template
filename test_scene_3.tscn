@@ -1,0 +1,183 @@
+[gd_scene load_steps=10 format=3 uid="uid://bjmduy4km2mud"]
+
+[ext_resource type="PackedScene" uid="uid://fkfl1hlt6pie" path="res://player.tscn" id="1_ha3uq"]
+[ext_resource type="Texture2D" uid="uid://dbkc1wgpgpqju" path="res://icon.svg" id="2_ygp7m"]
+[ext_resource type="Script" uid="uid://8jw701xj4gvi" path="res://trigger_leveltransition.gd" id="3_8vpas"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_6adnx"]
+
+[sub_resource type="Sky" id="Sky_uhqqe"]
+sky_material = SubResource("ProceduralSkyMaterial_6adnx")
+
+[sub_resource type="Environment" id="Environment_ia1lp"]
+background_mode = 2
+sky = SubResource("Sky_uhqqe")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sasra"]
+albedo_texture = ExtResource("2_ygp7m")
+uv1_triplanar = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2nij2"]
+transparency = 1
+albedo_color = Color(0.8666667, 0.36078432, 0, 0.5921569)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_7cbxl"]
+size = Vector3(8, 1, 8)
+
+[node name="Node3D" type="Node3D"]
+
+[node name="Player" parent="." instance=ExtResource("1_ha3uq")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -93, -30, 91)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_ia1lp")
+
+[node name="CSGBox3D19" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -87, 8, 91)
+use_collision = true
+size = Vector3(19, 1, 9)
+material = SubResource("StandardMaterial3D_sasra")
+
+[node name="CSGBox3D21" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -96, 4, 91)
+use_collision = true
+size = Vector3(1, 7, 9)
+material = SubResource("StandardMaterial3D_sasra")
+
+[node name="CSGBox3D20" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -82.5, 1, 91)
+use_collision = true
+size = Vector3(10, 1, 9)
+material = SubResource("StandardMaterial3D_sasra")
+
+[node name="CSGBox3D26" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -129, -37, 91)
+use_collision = true
+size = Vector3(83, 1, 9)
+material = SubResource("StandardMaterial3D_sasra")
+
+[node name="CSGBox3D30" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -175.5, -37, 115)
+use_collision = true
+size = Vector3(10, 1, 57)
+material = SubResource("StandardMaterial3D_sasra")
+
+[node name="CSGBox3D33" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -175.5, -29, 115)
+use_collision = true
+size = Vector3(10, 1, 57)
+material = SubResource("StandardMaterial3D_sasra")
+
+[node name="CSGBox3D29" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -138.5, -29, 91)
+use_collision = true
+size = Vector3(84, 1, 9)
+material = SubResource("StandardMaterial3D_sasra")
+
+[node name="CSGBox3D24" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -87, -18, 91)
+use_collision = true
+size = Vector3(1, 39, 9)
+material = SubResource("StandardMaterial3D_sasra")
+
+[node name="CSGBox3D25" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -96, -14, 91)
+use_collision = true
+size = Vector3(1, 31, 9)
+material = SubResource("StandardMaterial3D_sasra")
+
+[node name="CSGBox3D17" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -87, 4.5, 87)
+use_collision = true
+size = Vector3(19, 8, 1)
+material = SubResource("StandardMaterial3D_sasra")
+
+[node name="CSGBox3D18" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -129, -33.5, 96)
+use_collision = true
+size = Vector3(83, 8, 1)
+material = SubResource("StandardMaterial3D_sasra")
+
+[node name="CSGBox3D32" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -170, -33.5, 120)
+use_collision = true
+size = Vector3(1, 8, 47)
+material = SubResource("StandardMaterial3D_sasra")
+
+[node name="CSGBox3D31" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -181, -33.5, 115.5)
+use_collision = true
+size = Vector3(1, 8, 56)
+material = SubResource("StandardMaterial3D_sasra")
+
+[node name="CSGBox3D28" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -134, -33.5, 87)
+use_collision = true
+size = Vector3(93, 8, 1)
+material = SubResource("StandardMaterial3D_sasra")
+
+[node name="CSGBox3D27" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -87, 4.5, 96)
+use_collision = true
+size = Vector3(19, 8, 1)
+material = SubResource("StandardMaterial3D_sasra")
+
+[node name="CSGBox3D22" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -91.5, -14.5, 96)
+use_collision = true
+size = Vector3(8, 30, 1)
+material = SubResource("StandardMaterial3D_sasra")
+
+[node name="CSGBox3D23" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -91.5, -14.5, 87)
+use_collision = true
+size = Vector3(8, 30, 1)
+material = SubResource("StandardMaterial3D_sasra")
+
+[node name="OmniLight3D17" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -92, -28, 91)
+shadow_enabled = true
+omni_range = 13.0
+
+[node name="OmniLight3D18" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -103, -31, 91)
+shadow_enabled = true
+omni_range = 13.0
+
+[node name="OmniLight3D19" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -118, -31, 91)
+shadow_enabled = true
+omni_range = 13.0
+
+[node name="OmniLight3D20" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -139, -31, 91)
+shadow_enabled = true
+omni_range = 13.0
+
+[node name="OmniLight3D21" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -168, -31, 91)
+shadow_enabled = true
+omni_range = 13.0
+
+[node name="levelChangePoint" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 4)
+
+[node name="levelChangePoint2" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -92, -28, 91)
+
+[node name="Area3D2" type="Area3D" parent="." node_paths=PackedStringArray("origin", "player")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -91, -27, 92)
+script = ExtResource("3_8vpas")
+crossMapName = "Transition_DevTest3"
+otherMapPath = "res://test_scene_2.tscn"
+origin = NodePath("../levelChangePoint2")
+player = NodePath("../Player")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Area3D2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0, -0.5)
+size = Vector3(8, 1, 8)
+material = SubResource("StandardMaterial3D_2nij2")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0, -0.5)
+shape = SubResource("BoxShape3D_7cbxl")
