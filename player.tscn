@@ -13,3 +13,32 @@ shape = SubResource("CapsuleShape3D_6adnx")
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7, 0)
+
+[node name="Label" type="Label" parent="."]
+offset_right = 40.0
+offset_bottom = 23.0
+text = "Current Velocity:
+Clamped to Max Velocity:
+
+Current Speed:"
+
+[node name="cvel" type="Label" parent="."]
+offset_left = 136.0
+offset_top = 1.0
+offset_right = 331.0
+offset_bottom = 50.0
+text = "(0,0,0)"
+
+[node name="mvel" type="Label" parent="."]
+offset_left = 197.0
+offset_top = 27.0
+offset_right = 392.0
+offset_bottom = 76.0
+text = "(0,0,0)"
+
+[node name="speed" type="Label" parent="."]
+offset_left = 120.0
+offset_top = 79.0
+offset_right = 315.0
+offset_bottom = 128.0
+text = "SPEED"

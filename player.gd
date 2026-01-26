@@ -2,8 +2,12 @@ extends CharacterBody3D
 
 @export var sensitivity = 0.8
 @export_category("Movement Control")
-@export var SPEED = 5.0
+@export var DEFAULT_SPEED = 5.0
+@export var MIDAIR_SPEED = 1.0
 @export var JUMP_VELOCITY = 4.5
+@export var MAX_FRAMETIME = 10 ## Maximum amount of frames needed before the next slow-down deceleration step.
+
+var SPEED = DEFAULT_SPEED
 
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
@@ -20,7 +24,12 @@ var accel_velocity = Vector3.ZERO
 
 var accel_status = 0.0
 
+var friction_status = 0.0
+
 func _process(delta: float) -> void:
+	$cvel.text = str(accel_velocity)
+	$speed.text = str(SPEED)
+	$mvel.text = str(clamp(accel_velocity,Vector3(-MIDAIR_SPEED - DEFAULT_SPEED,-JUMP_VELOCITY,-MIDAIR_SPEED - DEFAULT_SPEED),Vector3(MIDAIR_SPEED + DEFAULT_SPEED,JUMP_VELOCITY,MIDAIR_SPEED + DEFAULT_SPEED)))
 	if Input.is_action_just_pressed("pause"):
 		if Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
 			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
@@ -29,7 +38,7 @@ func _process(delta: float) -> void:
 	$Camera3D.rotation.x = lerp_angle($Camera3D.rotation.x,ideal_cx,delta*interpolation_rate)
 	rotation.y = lerp_angle(rotation.y,ideal_by,delta*interpolation_rate)
 	
-
+var frametime_elapsed = 0
 func _physics_process(delta: float) -> void:
 	# Add the gravity.
 	if not is_on_floor():
@@ -37,7 +46,21 @@ func _physics_process(delta: float) -> void:
 	
 	# Handle jump.
 	if Input.is_action_just_pressed("jump") and is_on_floor():
-		velocity.y = JUMP_VELOCITY
+		SPEED += MIDAIR_SPEED
+		velocity.y = JUMP_VELOCITY # Scratch that, the reason bhopping is so elegant is BECAUSE the jumps mean larger strides
+		#velocity.y = (JUMP_VELOCITY + 1.0) - SPEED/5 # the reason for the +1 is because jump_velocity is normal while you're at normal speed, and then...
+	elif is_on_floor() and (not Input.is_action_just_pressed("jump")):
+		if frametime_elapsed > MAX_FRAMETIME:
+			if SPEED > DEFAULT_SPEED:
+				SPEED = lerp(SPEED,DEFAULT_SPEED,friction_status) # friction???
+			if SPEED < DEFAULT_SPEED:
+				SPEED = DEFAULT_SPEED
+			friction_status += delta
+			if friction_status > 1.0:
+				friction_status = 0.0
+			frametime_elapsed = 0
+		else:
+			frametime_elapsed += 1
 
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
