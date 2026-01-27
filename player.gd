@@ -3,12 +3,13 @@ extends CharacterBody3D
 @export var sensitivity = 0.8
 @export var look_tilt = 5 ## Number of degrees to tilt the player's roll in while wallrunning
 @export_category("Movement Control")
-@export var DEFAULT_SPEED = 5.0
-@export var MIDAIR_SPEED = 1.0
-@export var JUMP_VELOCITY = 4.5
-@export var MAX_FRAMETIME = 10 ## Maximum amount of frames needed before the next slow-down deceleration step.
+@export var WALLRUN_ENABLED := true
+@export var DEFAULT_SPEED := 5.0
+@export var MIDAIR_SPEED := 1.0
+@export var JUMP_VELOCITY := 4.5
+@export var MAX_FRAMETIME := 10 ## Maximum amount of frames needed before the next slow-down deceleration step.
 
-var SPEED = DEFAULT_SPEED
+var SPEED := DEFAULT_SPEED
 
 func _ready():
 	print("LOADING PLAYER...")
@@ -25,19 +26,19 @@ func _ready():
 		$Camera3D.rotation = GlobalScope.player_camera_rotation
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
-var ideal_cx = 0.0
-var ideal_by = 0.0
-var interpolation_rate = 10
+var ideal_cx := 0.0
+var ideal_by := 0.0
+var interpolation_rate := 10
 
-var accel_interpolation_rate = 5.0
+var accel_interpolation_rate := 5.0
 
-var decel_interpolation_rate = 20.0
+var decel_interpolation_rate := 20.0
 
-var accel_velocity = Vector3.ZERO
+var accel_velocity := Vector3.ZERO
 
-var accel_status = 0.0
+var accel_status := 0.0
 
-var friction_status = 0.0
+var friction_status := 0.0
 
 func _process(delta: float) -> void:
 	$cvel.text = str(accel_velocity)
@@ -51,14 +52,17 @@ func _process(delta: float) -> void:
 	$Camera3D.rotation.x = lerp_angle($Camera3D.rotation.x,ideal_cx,delta*interpolation_rate)
 	rotation.y = lerp_angle(rotation.y,ideal_by,delta*interpolation_rate)
 	
-var frametime_elapsed = 0
+var frametime_elapsed := 0
 
-var wallrun_elapsed = 0.0
+var wallrun_elapsed := 0.0
 
 func wallrunning_enabled(delta):
-	wallrun_elapsed += delta
-	
-	return is_on_wall_only() and wallrun_elapsed < 10.0
+	if WALLRUN_ENABLED:
+		wallrun_elapsed += delta
+		
+		return is_on_wall_only() and wallrun_elapsed < 10.0
+	else:
+		return false
 
 @onready var movementTween = null
 
@@ -66,33 +70,38 @@ var bonusWalljumpJump = false
 
 func _physics_process(delta: float) -> void:
 	# Add the gravity.
-	if is_on_wall_only() and wallrun_elapsed < 10.0:
+	if wallrunning_enabled(delta):
 		if $Camera3D.rotation_degrees.z == 0:
+			if SPEED < 18:
+				SPEED = 18.0
+			bonusWalljumpJump = true
 			movementTween = create_tween()
 			movementTween.tween_property($Camera3D, "rotation_degrees:z", (get_wall_normal().x + get_wall_normal().z)*look_tilt, 0.5)
 	else:
 		if movementTween != null: movementTween.stop()
 		$Camera3D.rotation_degrees.z = 0
-	if not is_on_floor() and not wallrunning_enabled(delta):
+		bonusWalljumpJump = false
+	if not is_on_floor() and not wallrunning_enabled(0):
 		velocity += get_gravity() * delta
 		bonusWalljumpJump = false
 	else:
 		wallrun_elapsed = 0.0
-	if wallrunning_enabled(delta) and not is_on_floor():
+	if wallrunning_enabled(0) and not is_on_floor():
 		velocity += get_gravity() / 5 * delta
 	# Handle jump.
 	if Input.is_action_just_pressed("jump") and (is_on_floor() or bonusWalljumpJump):
+		if not is_on_floor(): bonusWalljumpJump = false
 		SPEED += MIDAIR_SPEED
 		friction_status = 0.0
 		wallrun_elapsed = 0.0
-		bonusWalljumpJump = true
 		velocity.y = JUMP_VELOCITY # Scratch that, the reason bhopping is so elegant is BECAUSE the jumps mean larger strides
 		#velocity.y = (JUMP_VELOCITY + 1.0) - SPEED/5 # the reason for the +1 is because jump_velocity is normal while you're at normal speed, and then...
 	elif is_on_floor() and (not Input.is_action_just_pressed("jump")):
+		bonusWalljumpJump = false
 		wallrun_elapsed = 0.0
 		if frametime_elapsed > MAX_FRAMETIME:
 			if SPEED > DEFAULT_SPEED:
-				SPEED = lerp(SPEED,DEFAULT_SPEED,friction_status) # friction???
+				SPEED = lerp(float(SPEED),float(DEFAULT_SPEED),float(friction_status)) # friction???
 			if SPEED < DEFAULT_SPEED:
 				SPEED = DEFAULT_SPEED
 			friction_status += delta
