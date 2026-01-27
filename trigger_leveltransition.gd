@@ -10,7 +10,7 @@ extends Area3D
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	if GlobalScope.current_level_transition == crossMapName:
+	if GlobalScope.current_level_transition == crossMapName and crossMapName != "":
 		player.position = GlobalScope.player_position + origin.global_position
 	connect("body_entered", body_entered_call)
 	pass # Replace with function body.
@@ -33,4 +33,4 @@ func body_entered_call(node: Node3D):
 		GlobalScope.player_cx = node.ideal_cx
 		GlobalScope.player_speed = node.SPEED
 		GlobalScope.player_camera_rotation = node.get_node("Camera3D").rotation
-		get_tree().change_scene_to_file(otherMapPath)
+		get_tree().call_deferred("change_scene_to_file",otherMapPath)

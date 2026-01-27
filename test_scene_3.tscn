@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://bjmduy4km2mud"]
+[gd_scene load_steps=11 format=3 uid="uid://bjmduy4km2mud"]
 
 [ext_resource type="PackedScene" uid="uid://fkfl1hlt6pie" path="res://player.tscn" id="1_ha3uq"]
 [ext_resource type="Texture2D" uid="uid://dbkc1wgpgpqju" path="res://icon.svg" id="2_ygp7m"]
@@ -20,6 +20,9 @@ uv1_triplanar = true
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2nij2"]
 transparency = 1
 albedo_color = Color(0.8666667, 0.36078432, 0, 0.5921569)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ha3uq"]
+size = Vector3(585, 1, 553)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_7cbxl"]
 size = Vector3(8, 1, 8)
@@ -62,10 +65,40 @@ use_collision = true
 size = Vector3(10, 1, 57)
 material = SubResource("StandardMaterial3D_sasra")
 
-[node name="CSGBox3D33" type="CSGBox3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -175.5, -29, 115)
+[node name="CSGBox3D34" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -175.5, -37, 149)
 use_collision = true
-size = Vector3(10, 1, 57)
+size = Vector3(10, 1, 11)
+material = SubResource("StandardMaterial3D_sasra")
+
+[node name="CSGBox3D38" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -175.5, -37, 428.5)
+use_collision = true
+size = Vector3(10, 1, 108)
+material = SubResource("StandardMaterial3D_sasra")
+
+[node name="CSGBox3D35" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -175.5, -37, 205)
+use_collision = true
+size = Vector3(10, 1, 11)
+material = SubResource("StandardMaterial3D_sasra")
+
+[node name="CSGBox3D36" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -175.5, -37, 260)
+use_collision = true
+size = Vector3(10, 1, 11)
+material = SubResource("StandardMaterial3D_sasra")
+
+[node name="CSGBox3D37" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -175.5, -37, 321)
+use_collision = true
+size = Vector3(10, 1, 11)
+material = SubResource("StandardMaterial3D_sasra")
+
+[node name="CSGBox3D33" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -175.5, -29, 284.5)
+use_collision = true
+size = Vector3(10, 1, 396)
 material = SubResource("StandardMaterial3D_sasra")
 
 [node name="CSGBox3D29" type="CSGBox3D" parent="."]
@@ -99,15 +132,15 @@ size = Vector3(83, 8, 1)
 material = SubResource("StandardMaterial3D_sasra")
 
 [node name="CSGBox3D32" type="CSGBox3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -170, -33.5, 120)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -170, -33.5, 289.5)
 use_collision = true
-size = Vector3(1, 8, 47)
+size = Vector3(1, 8, 386)
 material = SubResource("StandardMaterial3D_sasra")
 
 [node name="CSGBox3D31" type="CSGBox3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -181, -33.5, 115.5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -181, -33.5, 285)
 use_collision = true
-size = Vector3(1, 8, 56)
+size = Vector3(1, 8, 395)
 material = SubResource("StandardMaterial3D_sasra")
 
 [node name="CSGBox3D28" type="CSGBox3D" parent="."]
@@ -159,11 +192,27 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -168, -31, 91)
 shadow_enabled = true
 omni_range = 13.0
 
-[node name="levelChangePoint" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 4)
-
 [node name="levelChangePoint2" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -92, -28, 91)
+
+[node name="levelChangePoint" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -173, -62, 237)
+
+[node name="Area3D3" type="Area3D" parent="." node_paths=PackedStringArray("origin", "player")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -173, -62, 237)
+script = ExtResource("3_8vpas")
+otherMapPath = "res://test_scene_3.tscn"
+origin = NodePath("../levelChangePoint")
+player = NodePath("../Player")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Area3D3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0, 38)
+size = Vector3(584, 1, 555)
+material = SubResource("StandardMaterial3D_2nij2")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 37)
+shape = SubResource("BoxShape3D_ha3uq")
 
 [node name="Area3D2" type="Area3D" parent="." node_paths=PackedStringArray("origin", "player")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -91, -27, 92)
