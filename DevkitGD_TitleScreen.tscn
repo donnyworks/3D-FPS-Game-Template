@@ -1,0 +1,77 @@
+[gd_scene load_steps=2 format=3 uid="uid://bayx6hwwi0cis"]
+
+[ext_resource type="Script" uid="uid://c54letsg6ll33" path="res://devkit_menumanager.gd" id="1_03f0x"]
+
+[node name="DevkitGdTitleScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_03f0x")
+
+[node name="GameTitle" type="Label" parent="."]
+layout_mode = 0
+offset_left = 40.0
+offset_top = 297.0
+offset_right = 598.0
+offset_bottom = 361.0
+theme_override_font_sizes/font_size = 46
+text = "THIS IS THE GAME'S TITLE"
+
+[node name="TitleButtonElements" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.035
+anchor_top = 1.0
+anchor_right = 0.035
+anchor_bottom = 1.0
+offset_left = -0.3199997
+offset_top = -265.0
+offset_right = 152.68
+grow_vertical = 0
+
+[node name="NewGameButton" type="Button" parent="TitleButtonElements"]
+layout_mode = 2
+text = "NEW GAME"
+
+[node name="LoadGameButton" type="Button" parent="TitleButtonElements"]
+layout_mode = 2
+disabled = true
+text = "LOAD GAME"
+
+[node name="AchievementsButton" type="Button" parent="TitleButtonElements"]
+layout_mode = 2
+disabled = true
+text = "ACHIEVEMENTS"
+
+[node name="SettingsButton" type="Button" parent="TitleButtonElements"]
+layout_mode = 2
+text = "OPTIONS"
+
+[node name="BonusContentButton" type="Button" parent="TitleButtonElements"]
+layout_mode = 2
+disabled = true
+text = "BONUS CONTENT"
+
+[node name="QuitButton" type="Button" parent="TitleButtonElements"]
+layout_mode = 2
+text = "QUIT"
+
+[node name="QuitConfirmDialog" type="ConfirmationDialog" parent="."]
+oversampling_override = 1.0
+title = "WAIT, DON'T GO!"
+initial_position = 1
+size = Vector2i(325, 100)
+dialog_text = "Is it really that much of a bother to you?"
+
+[connection signal="pressed" from="TitleButtonElements/NewGameButton" to="." method="_on_new_game_button_pressed"]
+[connection signal="pressed" from="TitleButtonElements/LoadGameButton" to="." method="_on_load_game_button_pressed"]
+[connection signal="pressed" from="TitleButtonElements/AchievementsButton" to="." method="_on_achievements_button_pressed"]
+[connection signal="pressed" from="TitleButtonElements/SettingsButton" to="." method="_on_settings_button_pressed"]
+[connection signal="pressed" from="TitleButtonElements/BonusContentButton" to="." method="_on_bonus_content_button_pressed"]
+[connection signal="pressed" from="TitleButtonElements/QuitButton" to="." method="_on_quit_button_pressed"]
+[connection signal="canceled" from="QuitConfirmDialog" to="." method="_on_quit_confirm_dialog_canceled"]
+[connection signal="close_requested" from="QuitConfirmDialog" to="." method="_on_quit_confirm_dialog_canceled"]
+[connection signal="confirmed" from="QuitConfirmDialog" to="." method="_on_quit_confirm_dialog_confirmed"]
