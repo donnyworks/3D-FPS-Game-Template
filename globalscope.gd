@@ -34,8 +34,11 @@ var GameInfo = {
 	"DevMode":true,
 	"Achievements":{},
 	"AchievementIcons":{},
+	"ChapterList":{},
+	"ChapterIcons":{},
 	"GameHasCustomSupport":false,
 	"GameHasLoadSupport":false,
+	"AllowInfiniteDoubleJumps":true,
 	"intended_version":"LATEST"
 }
 

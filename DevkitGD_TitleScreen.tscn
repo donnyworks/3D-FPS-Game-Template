@@ -66,6 +66,65 @@ initial_position = 1
 size = Vector2i(325, 100)
 dialog_text = "Is it really that much of a bother to you?"
 
+[node name="ChapterSelectDialog" type="Window" parent="."]
+oversampling_override = 1.0
+title = "Select Chapter"
+initial_position = 1
+size = Vector2i(600, 400)
+visible = false
+
+[node name="ColorRect" type="ColorRect" parent="ChapterSelectDialog"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.62152386, 0.62152386, 0.6215238, 1)
+
+[node name="ChapterList" type="ItemList" parent="ChapterSelectDialog"]
+anchors_preset = -1
+anchor_left = 0.053000003
+anchor_top = 0.16700001
+anchor_right = 0.95000005
+anchor_bottom = 0.97
+offset_left = 0.19999886
+offset_top = 0.19999695
+
+[node name="LineEdit" type="LineEdit" parent="ChapterSelectDialog"]
+anchors_preset = -1
+anchor_left = 0.44200003
+anchor_top = 0.027
+anchor_right = 0.95000005
+anchor_bottom = 0.027
+offset_left = -0.2000122
+offset_top = 0.19999981
+offset_bottom = 31.2
+text = "chapters in the game i'm playig rn"
+
+[node name="Label" type="Label" parent="ChapterSelectDialog"]
+anchors_preset = -1
+anchor_left = 0.055000003
+anchor_top = 0.007
+anchor_right = 0.437
+anchor_bottom = 0.120000005
+offset_top = 0.19999981
+offset_right = -0.2000122
+theme_override_font_sizes/font_size = 32
+text = "chapter google"
+
+[node name="SearchResultsThing" type="Label" parent="ChapterSelectDialog"]
+anchors_preset = -1
+anchor_left = 0.053000003
+anchor_top = 0.10700001
+anchor_right = 0.492
+anchor_bottom = 0.10700001
+offset_left = 0.19999886
+offset_top = 0.19999695
+offset_right = -0.2000122
+offset_bottom = 24.199997
+theme_override_font_sizes/font_size = 17
+text = "Your search returned %s results"
+
 [connection signal="pressed" from="TitleButtonElements/NewGameButton" to="." method="_on_new_game_button_pressed"]
 [connection signal="pressed" from="TitleButtonElements/LoadGameButton" to="." method="_on_load_game_button_pressed"]
 [connection signal="pressed" from="TitleButtonElements/AchievementsButton" to="." method="_on_achievements_button_pressed"]
@@ -75,3 +134,4 @@ dialog_text = "Is it really that much of a bother to you?"
 [connection signal="canceled" from="QuitConfirmDialog" to="." method="_on_quit_confirm_dialog_canceled"]
 [connection signal="close_requested" from="QuitConfirmDialog" to="." method="_on_quit_confirm_dialog_canceled"]
 [connection signal="confirmed" from="QuitConfirmDialog" to="." method="_on_quit_confirm_dialog_confirmed"]
+[connection signal="item_activated" from="ChapterSelectDialog/ChapterList" to="." method="_on_chapter_list_item_activated"]

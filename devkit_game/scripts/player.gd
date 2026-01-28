@@ -81,24 +81,24 @@ func _physics_process(delta: float) -> void:
 	else:
 		if movementTween != null: movementTween.stop()
 		self.rotation_degrees.z = 0
-		bonusWalljumpJump = false
+		bonusWalljumpJump = GlobalScope.GameInfo.AllowInfiniteDoubleJumps
 	if not is_on_floor() and not wallrunning_enabled(0):
 		velocity += get_gravity() * delta
-		bonusWalljumpJump = false
+		bonusWalljumpJump = GlobalScope.GameInfo.AllowInfiniteDoubleJumps
 	else:
 		wallrun_elapsed = 0.0
 	if wallrunning_enabled(0) and not is_on_floor():
 		velocity += get_gravity() / 5 * delta
 	# Handle jump.
 	if Input.is_action_just_pressed("jump") and (is_on_floor() or bonusWalljumpJump):
-		if not is_on_floor(): bonusWalljumpJump = false
+		if not is_on_floor(): bonusWalljumpJump = GlobalScope.GameInfo.AllowInfiniteDoubleJumps
 		SPEED += MIDAIR_SPEED
 		friction_status = 0.0
 		wallrun_elapsed = 0.0
 		velocity.y = JUMP_VELOCITY # Scratch that, the reason bhopping is so elegant is BECAUSE the jumps mean larger strides
 		#velocity.y = (JUMP_VELOCITY + 1.0) - SPEED/5 # the reason for the +1 is because jump_velocity is normal while you're at normal speed, and then...
 	elif is_on_floor() and (not Input.is_action_just_pressed("jump")):
-		bonusWalljumpJump = false
+		bonusWalljumpJump = GlobalScope.GameInfo.AllowInfiniteDoubleJumps
 		wallrun_elapsed = 0.0
 		if frametime_elapsed > MAX_FRAMETIME:
 			if SPEED > DEFAULT_SPEED:

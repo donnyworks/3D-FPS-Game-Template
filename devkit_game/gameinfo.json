@@ -8,7 +8,11 @@
 	"ShowLogos":false,
 	"Achievements":{},
 	"AchievementIcons":{},
+	"ChapterList":{"The Beginning":"test_scene"},
+	"ChapterIcons":{"The Beginning":"generic_image.png"},
 	"GameHasCustomSupport":false,
 	"GameHasLoadSupport":false,
+	"GameHasChapters":true,
+	"AllowInfiniteDoubleJumps":false,
 	"intended_version":"LATEST"
 }
