@@ -1,0 +1,14 @@
+{
+	"GameName":"3D basic FPS controller (LATEST)",
+	"WindowTitle":"3D legit FPS tutorial game (FUTURE EDITION)",
+	"WallrunningEnabled":true,
+	"StartingLevel":"test_scene",
+	"SpeedrunTimer":false,
+	"DevMode":true,
+	"ShowLogos":false,
+	"Achievements":{},
+	"AchievementIcons":{},
+	"GameHasCustomSupport":false,
+	"GameHasLoadSupport":false,
+	"intended_version":"LATEST"
+}
