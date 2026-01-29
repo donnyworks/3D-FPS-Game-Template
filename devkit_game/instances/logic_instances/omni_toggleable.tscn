@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://ctwl4ntthu46t"]
+
+[ext_resource type="Script" uid="uid://dir2a2r50epks" path="res://devkit_game/scripts/omni_toggleable.gd" id="1_y5vbt"]
+
+[node name="OmniToggleable" type="OmniLight3D" groups=["Runnable"]]
+editor_description = "parameter = light level"
+script = ExtResource("1_y5vbt")

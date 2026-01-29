@@ -1,0 +1,21 @@
+[gd_scene load_steps=2 format=3 uid="uid://blduym5cbjsw0"]
+
+[ext_resource type="Script" uid="uid://boc6i4n2bc1r8" path="res://devkit_game/scripts/trigger_leveltransition.gd" id="1_kamdj"]
+
+[node name="Trigger" type="Area3D" groups=["Runnable"]]
+editor_description = "-- A trigger_leveltransition is a brush entity (see: docs/brush_entities) that allows for actions to be TRIGGERed.
+
+It also changes levels or something
+
+0 = enable on entry
+1 = enable on exit
+2 = disable"
+script = ExtResource("1_kamdj")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+visible = false
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]

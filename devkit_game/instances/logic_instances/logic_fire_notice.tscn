@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cia7cetvxd8h6"]
+
+[ext_resource type="Script" uid="uid://dem1wn5nnek5q" path="res://devkit_game/scripts/logic_fire_notice.gd" id="1_ex84t"]
+
+[node name="logic_fire_notice" type="Node" groups=["Runnable"]]
+script = ExtResource("1_ex84t")

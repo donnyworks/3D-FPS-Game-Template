@@ -11,13 +11,17 @@ config_version=5
 [application]
 
 config/name="3D basic FPS controller (LATEST)"
-run/main_scene="uid://wckhfteja77a"
+run/main_scene="uid://bhimcx0wroqs6"
 config/features=PackedStringArray("4.5", "GL Compatibility")
 config/icon="res://devkit_game/textures/icon.svg"
 
 [autoload]
 
 GlobalScope="*res://globalscope.gd"
+
+[global_group]
+
+Runnable="Entities that can be \"run\" by a trigger"
 
 [input]
 

@@ -1,5 +1,4 @@
-extends trigger_generic
-class_name trigger_leveltransition
+extends Area3D
 
 @export var crossMapName = "" ## Transition name to keep track of across maps.
 
@@ -11,28 +10,15 @@ class_name trigger_leveltransition
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	if player == null:
-		OS.alert("Failed to load trigger_leveltransition: Invalid object (BaseTriggerLV->PlayerObject)","DevKitGD")
-		queue_free()
-		return
-	if origin == null:
-		print("trigger_leveltransition : Warning - Invalid object (BaseTriggerLV->PlayerOrientationOrigin)")
-		print("trigger_leveltransition : Setting to: (BaseTriggerLV->GetCurrentInstance)")
-		origin = self
-	if otherMapPath == "":
-		OS.alert("Failed to load trigger_leveltransition: Invalid scene cache (DevKitGD::PrecacheScene(BaseTriggerLV->NextMapName))")
-		queue_free()
-		return
-	if get_parent() is CSGShape3D:
-		pass
-	else:
-		print("trigger_leveltransition : Failed to load trigger_leveltransition - attempted to spawn brush entity as point entity.")
-		queue_free()
-		return
 	if GlobalScope.current_level_transition == crossMapName and crossMapName != "":
 		player.position = GlobalScope.player_position + origin.global_position
 	connect("body_entered", body_entered_call)
 	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta: float) -> void:
+	pass
 
 func body_entered_call(node: Node3D):
 	if node.name == "Player":

@@ -13,6 +13,6 @@
 	"GameHasCustomSupport":false,
 	"GameHasLoadSupport":false,
 	"GameHasChapters":true,
-	"AllowInfiniteDoubleJumps":false,
+	"AllowInfiniteDoubleJumps":true,
 	"intended_version":"LATEST"
 }

@@ -1,0 +1,19 @@
+[gd_scene load_steps=2 format=3 uid="uid://b1op3gw0njru1"]
+
+[ext_resource type="Script" uid="uid://clhjgahwn0jt" path="res://devkit_game/scripts/trigger_generic.gd" id="1_q7bn4"]
+
+[node name="Trigger" type="Area3D" groups=["Runnable"]]
+editor_description = "-- A trigger_generic is a brush entity (see: docs/brush_entities) that allows for actions to be TRIGGERed.
+
+0 = enable on entry
+1 = enable on exit
+2 = disable"
+script = ExtResource("1_q7bn4")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+visible = false
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]

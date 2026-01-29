@@ -1,0 +1,8 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://dwups8gjovfsj"]
+
+[ext_resource type="Texture2D" uid="uid://dp0x8sv4xa20n" path="res://devkit_game/textures/tools/trigger.png" id="1_sxpml"]
+
+[resource]
+transparency = 1
+albedo_texture = ExtResource("1_sxpml")
+uv1_triplanar = true

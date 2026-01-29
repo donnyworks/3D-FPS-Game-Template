@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://fkfl1hlt6pie" path="res://devkit_game/instances/player.tscn" id="1_y7vuf"]
 [ext_resource type="Texture2D" uid="uid://dbkc1wgpgpqju" path="res://devkit_game/textures/icon.svg" id="2_31skx"]
-[ext_resource type="Script" uid="uid://8jw701xj4gvi" path="res://devkit_game/scripts/trigger_leveltransition.gd" id="3_06s8w"]
+[ext_resource type="Script" uid="uid://8jw701xj4gvi" path="res://devkit_game/scripts/trigger_leveltransition_legacy.gd" id="3_06s8w"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_6adnx"]
 

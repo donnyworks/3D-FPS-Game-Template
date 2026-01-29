@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://bj25j2by5lfjk"]
+
+[ext_resource type="Script" uid="uid://b3jufd8lxd633" path="res://devkit_game/scripts/spot_toggleable.gd" id="1_q18ds"]
+
+[node name="SpotToggleable" type="SpotLight3D" groups=["Runnable"]]
+editor_description = "parameter = light level"
+script = ExtResource("1_q18ds")

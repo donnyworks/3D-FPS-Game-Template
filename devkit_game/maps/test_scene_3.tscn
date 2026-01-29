@@ -1,8 +1,12 @@
-[gd_scene load_steps=11 format=3 uid="uid://bjmduy4km2mud"]
+[gd_scene load_steps=15 format=3 uid="uid://bjmduy4km2mud"]
 
 [ext_resource type="PackedScene" uid="uid://fkfl1hlt6pie" path="res://devkit_game/instances/player.tscn" id="1_f8wc2"]
 [ext_resource type="Texture2D" uid="uid://dbkc1wgpgpqju" path="res://devkit_game/textures/icon.svg" id="2_2j337"]
-[ext_resource type="Script" uid="uid://8jw701xj4gvi" path="res://devkit_game/scripts/trigger_leveltransition.gd" id="3_je2qp"]
+[ext_resource type="Script" uid="uid://8jw701xj4gvi" path="res://devkit_game/scripts/trigger_leveltransition_legacy.gd" id="3_je2qp"]
+[ext_resource type="PackedScene" uid="uid://blduym5cbjsw0" path="res://devkit_game/instances/trigger_leveltransition.tscn" id="4_h28v8"]
+[ext_resource type="PackedScene" uid="uid://b1op3gw0njru1" path="res://devkit_game/instances/trigger_generic.tscn" id="4_je2qp"]
+[ext_resource type="Material" uid="uid://dwups8gjovfsj" path="res://devkit_game/textures/tools/material_trigger.tres" id="4_kjr10"]
+[ext_resource type="PackedScene" uid="uid://bj25j2by5lfjk" path="res://devkit_game/instances/logic_instances/spot_toggleable.tscn" id="5_kjr10"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_6adnx"]
 
@@ -214,19 +218,41 @@ material = SubResource("StandardMaterial3D_2nij2")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 37)
 shape = SubResource("BoxShape3D_ha3uq")
 
-[node name="Area3D2" type="Area3D" parent="." node_paths=PackedStringArray("origin", "player")]
+[node name="CSGBox3D2" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -91.5, -27, 91.5)
+size = Vector3(8, 1, 8)
+material = SubResource("StandardMaterial3D_2nij2")
+
+[node name="Trigger" parent="CSGBox3D2" node_paths=PackedStringArray("origin", "player") instance=ExtResource("4_h28v8")]
+crossMapName = "Transition_DevTest3"
+otherMapPath = "test_scene_2"
+origin = NodePath("../../levelChangePoint2")
+player = NodePath("../../Player")
+
+[node name="trigger_old_weshouldntbeusingthisanymore" type="Area3D" parent="." node_paths=PackedStringArray("origin", "player")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -91, -27, 92)
+visible = false
 script = ExtResource("3_je2qp")
 crossMapName = "Transition_DevTest3"
 otherMapPath = "test_scene_2"
 origin = NodePath("../levelChangePoint2")
 player = NodePath("../Player")
 
-[node name="CSGBox3D" type="CSGBox3D" parent="Area3D2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0, -0.5)
-size = Vector3(8, 1, 8)
-material = SubResource("StandardMaterial3D_2nij2")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D2"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="trigger_old_weshouldntbeusingthisanymore"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0, -0.5)
 shape = SubResource("BoxShape3D_7cbxl")
+disabled = true
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -175.5, -33, 384)
+size = Vector3(12, 7, 1)
+material = ExtResource("4_kjr10")
+
+[node name="Trigger" parent="CSGBox3D" instance=ExtResource("4_je2qp")]
+parameter_id = 10
+
+[node name="SpotToggleable" parent="CSGBox3D/Trigger" instance=ExtResource("5_kjr10")]
+transform = Transform3D(-1, -4.987918e-08, 1.0078787e-07, 7.1972934e-09, 0.86602545, 0.49999997, -1.1222445e-07, 0.49999997, -0.86602545, 0, 1.2857132, 0)
+light_color = Color(1, 0, 0, 1)
+shadow_enabled = true
+spot_range = 214.0
