@@ -11,6 +11,8 @@ var WALLRUN_ENABLED := true
 
 var SPEED := DEFAULT_SPEED
 
+var SOUP := 0 # Soup :)
+
 func _ready():
 	print("LOADING PLAYER...")
 	WALLRUN_ENABLED = GlobalScope.game_wallrun_enabled
@@ -41,10 +43,30 @@ var accel_status := 0.0
 
 var friction_status := 0.0
 
+var s_pressed = 0
+
+var o_pressed = 0
+
+var u_pressed = 0
+
+var p_pressed = 0
+
 func _process(delta: float) -> void:
 	$cvel.text = str(accel_velocity)
 	$speed.text = str(SPEED)
+	$suitMeter/suit.text = str(SOUP)
 	$mvel.text = str(clamp(accel_velocity,Vector3(-MIDAIR_SPEED - DEFAULT_SPEED,-JUMP_VELOCITY,-MIDAIR_SPEED - DEFAULT_SPEED),Vector3(MIDAIR_SPEED + DEFAULT_SPEED,JUMP_VELOCITY,MIDAIR_SPEED + DEFAULT_SPEED)))
+	if Input.is_key_pressed(KEY_S): s_pressed = 1
+	if Input.is_key_pressed(KEY_O) and s_pressed == 1: o_pressed = 1
+	if Input.is_key_pressed(KEY_U) and o_pressed == 1: u_pressed = 1
+	if Input.is_key_pressed(KEY_P) and u_pressed == 1: p_pressed = 1
+	if p_pressed == 1:
+		s_pressed = 0
+		o_pressed = 0
+		u_pressed = 0
+		p_pressed = 0
+		SOUP += 1
+	if Input.is_action_just_pressed("use"): $cantuse.play()
 	if Input.is_action_just_pressed("pause"):
 		if Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
 			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
@@ -119,6 +141,14 @@ func _physics_process(delta: float) -> void:
 	velocity.x = accel_velocity.x
 	velocity.z = accel_velocity.z
 	if direction:
+		if is_on_floor():
+			if not $floorcast.is_colliding():
+				if not $footsteps_generic.playing: $footsteps_generic.play()
+			else:
+				if not $floorcast.get_collider().is_in_group("TileFloor"):
+					if not $footsteps_generic.playing: $footsteps_generic.play()
+				else:
+					if not $footsteps_tile.playing: $footsteps_tile.play()
 		accel_velocity.x = lerp(accel_velocity.x,direction.x * SPEED,accel_status)
 		accel_velocity.z = lerp(accel_velocity.z,direction.z * SPEED,accel_status)
 		if accel_status < 1.0: accel_status += 1.0/accel_interpolation_rate

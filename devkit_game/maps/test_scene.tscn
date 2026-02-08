@@ -1,7 +1,7 @@
 [gd_scene load_steps=12 format=3 uid="uid://wckhfteja77a"]
 
 [ext_resource type="PackedScene" uid="uid://fkfl1hlt6pie" path="res://devkit_game/instances/player.tscn" id="1_y7vuf"]
-[ext_resource type="Texture2D" uid="uid://dbkc1wgpgpqju" path="res://devkit_game/textures/icon.svg" id="2_31skx"]
+[ext_resource type="Texture2D" uid="uid://b6mab0jrlvtun" path="res://devkit_game/textures/dev_facelesstile.png" id="2_y7vuf"]
 [ext_resource type="Script" uid="uid://8jw701xj4gvi" path="res://devkit_game/scripts/trigger_leveltransition_legacy.gd" id="3_06s8w"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_6adnx"]
@@ -14,7 +14,7 @@ background_mode = 2
 sky = SubResource("Sky_uhqqe")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sasra"]
-albedo_texture = ExtResource("2_31skx")
+albedo_texture = ExtResource("2_y7vuf")
 uv1_triplanar = true
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_ia1lp"]
@@ -112,7 +112,7 @@ size = Vector3(18, 7, 16)
 material = SubResource("StandardMaterial3D_sasra")
 
 [node name="CSGBox3D11" type="CSGBox3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.8660254, -0.5, 0, 0.5, 0.8660254, 3, -3.2141016, -7.200962)
+transform = Transform3D(1, 0, 0, 0, 0.8660254, -0.5, 0, 0.5, 0.8660254, 3, -3.1451166, -6.9696455)
 use_collision = true
 size = Vector3(3, 9, 11)
 material = SubResource("StandardMaterial3D_sasra")
@@ -130,7 +130,7 @@ use_collision = true
 size = Vector3(3, 9, 1)
 material = SubResource("StandardMaterial3D_sasra")
 
-[node name="CSGBox3D5" type="CSGBox3D" parent="."]
+[node name="CSGBox3D5" type="CSGBox3D" parent="." groups=["TileFloor"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 1, -13.5)
 use_collision = true
 size = Vector3(18, 5, 8)
@@ -138,6 +138,7 @@ material = SubResource("StandardMaterial3D_sasra")
 
 [node name="trophy1" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 4, -15)
+visible = false
 
 [node name="CSGMesh3D" type="CSGMesh3D" parent="trophy1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.66876125, 0)
@@ -197,6 +198,7 @@ player = NodePath("../Player")
 
 [node name="CSGBox3D" type="CSGBox3D" parent="Area3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0.5, 0)
+visible = false
 size = Vector3(6, 4, 1)
 material = SubResource("StandardMaterial3D_2nij2")
 

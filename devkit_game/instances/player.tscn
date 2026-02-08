@@ -1,9 +1,35 @@
-[gd_scene load_steps=3 format=3 uid="uid://fkfl1hlt6pie"]
+[gd_scene load_steps=17 format=3 uid="uid://fkfl1hlt6pie"]
 
 [ext_resource type="Script" uid="uid://b0onkd82pkrgc" path="res://devkit_game/scripts/player.gd" id="1_4flbx"]
+[ext_resource type="PackedScene" uid="uid://cwrc1444pjpel" path="res://devkit_game/resource/vgui_baseboard_recreation.tscn" id="2_883ss"]
+[ext_resource type="FontFile" uid="uid://cvvqs3a8lss8c" path="res://devkit_game/resource/vgui_hudfont_dejavu.ttf" id="3_4g8jo"]
+[ext_resource type="FontFile" uid="uid://dq56xfmeo5v08" path="res://devkit_game/resource/vgui_hudfont_boxrocket.ttf" id="4_r3ghy"]
+[ext_resource type="AudioStream" uid="uid://caijwesstmbp4" path="res://devkit_game/sounds/footsteps/concrete1.wav" id="5_yuy0i"]
+[ext_resource type="AudioStream" uid="uid://b5n5j04m353k3" path="res://devkit_game/sounds/footsteps/concrete2.wav" id="6_58pvu"]
+[ext_resource type="AudioStream" uid="uid://cwod88scakqoj" path="res://devkit_game/sounds/footsteps/concrete3.wav" id="7_ysw70"]
+[ext_resource type="AudioStream" uid="uid://tousu7n1ytal" path="res://devkit_game/sounds/footsteps/concrete4.wav" id="8_etjml"]
+[ext_resource type="AudioStream" uid="uid://cc2vtrfhyknow" path="res://devkit_game/sounds/suit_denydevice.wav" id="9_58pvu"]
+[ext_resource type="AudioStream" uid="uid://dxvqv4jbketqx" path="res://devkit_game/sounds/footsteps/tile1.wav" id="9_totlr"]
+[ext_resource type="AudioStream" uid="uid://dvtx87o5rn3fj" path="res://devkit_game/sounds/footsteps/tile2.wav" id="10_nrt6e"]
+[ext_resource type="AudioStream" uid="uid://bamh0mw3tdeos" path="res://devkit_game/sounds/footsteps/tile3.wav" id="11_ethnw"]
+[ext_resource type="AudioStream" uid="uid://dcx2mdhfl32c5" path="res://devkit_game/sounds/footsteps/tile4.wav" id="12_4b26i"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_6adnx"]
 height = 1.9
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_mjrxl"]
+streams_count = 4
+stream_0/stream = ExtResource("5_yuy0i")
+stream_1/stream = ExtResource("6_58pvu")
+stream_2/stream = ExtResource("7_ysw70")
+stream_3/stream = ExtResource("8_etjml")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_g82lg"]
+streams_count = 4
+stream_0/stream = ExtResource("9_totlr")
+stream_1/stream = ExtResource("10_nrt6e")
+stream_2/stream = ExtResource("11_ethnw")
+stream_3/stream = ExtResource("12_4b26i")
 
 [node name="Player" type="CharacterBody3D"]
 script = ExtResource("1_4flbx")
@@ -15,6 +41,7 @@ shape = SubResource("CapsuleShape3D_6adnx")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7, 0)
 
 [node name="Label" type="Label" parent="."]
+visible = false
 offset_right = 40.0
 offset_bottom = 23.0
 text = "Current Velocity:
@@ -23,6 +50,7 @@ Clamped to Max Velocity:
 Current Speed:"
 
 [node name="cvel" type="Label" parent="."]
+visible = false
 offset_left = 136.0
 offset_top = 1.0
 offset_right = 331.0
@@ -30,6 +58,7 @@ offset_bottom = 50.0
 text = "(0,0,0)"
 
 [node name="mvel" type="Label" parent="."]
+visible = false
 offset_left = 197.0
 offset_top = 27.0
 offset_right = 392.0
@@ -37,8 +66,129 @@ offset_bottom = 76.0
 text = "(0,0,0)"
 
 [node name="speed" type="Label" parent="."]
+visible = false
 offset_left = 120.0
 offset_top = 79.0
 offset_right = 315.0
 offset_bottom = 128.0
 text = "SPEED"
+
+[node name="healthMeter" parent="." instance=ExtResource("2_883ss")]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 22.0
+offset_top = -69.0
+offset_right = 173.0
+offset_bottom = -22.0
+grow_vertical = 0
+baseboard_color = Color(0, 0, 0, 0.29803923)
+
+[node name="healthText" type="Label" parent="healthMeter"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 4.0
+offset_top = -21.0
+offset_right = 66.0
+offset_bottom = 2.0
+grow_vertical = 0
+theme_override_colors/font_color = Color(1, 0.6666667, 0, 0.8627451)
+theme_override_fonts/font = ExtResource("3_4g8jo")
+text = "HEALTH"
+
+[node name="health" type="Label" parent="healthMeter"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -77.0
+offset_top = -53.0
+offset_right = -3.0
+offset_bottom = 5.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_colors/font_color = Color(1, 0.6666667, 0, 0.8627451)
+theme_override_fonts/font = ExtResource("4_r3ghy")
+theme_override_font_sizes/font_size = 47
+text = "100"
+horizontal_alignment = 2
+
+[node name="suitMeter" parent="." instance=ExtResource("2_883ss")]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 200.0
+offset_top = -69.0
+offset_right = 351.0
+offset_bottom = -22.0
+grow_vertical = 0
+baseboard_color = Color(0, 0, 0, 0.29803923)
+
+[node name="healthText" type="Label" parent="suitMeter"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 4.0
+offset_top = -21.0
+offset_right = 66.0
+offset_bottom = 2.0
+grow_vertical = 0
+theme_override_colors/font_color = Color(1, 0.6666667, 0, 0.8627451)
+theme_override_fonts/font = ExtResource("3_4g8jo")
+text = "SOUP"
+
+[node name="suit" type="Label" parent="suitMeter"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -77.0
+offset_top = -53.0
+offset_right = -3.0
+offset_bottom = 5.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_colors/font_color = Color(1, 0.6666667, 0, 0.8627451)
+theme_override_fonts/font = ExtResource("4_r3ghy")
+theme_override_font_sizes/font_size = 47
+text = "0"
+horizontal_alignment = 2
+
+[node name="health" type="Label" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -53.0
+offset_top = -37.0
+offset_right = 21.0
+offset_bottom = 42.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 0.6666667, 0, 0.8627451)
+theme_override_fonts/font = ExtResource("4_r3ghy")
+theme_override_font_sizes/font_size = 64
+text = "Q"
+horizontal_alignment = 2
+
+[node name="footsteps_generic" type="AudioStreamPlayer3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.96266353, 0)
+stream = SubResource("AudioStreamRandomizer_mjrxl")
+
+[node name="footsteps_tile" type="AudioStreamPlayer3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.96266353, 0)
+stream = SubResource("AudioStreamRandomizer_g82lg")
+
+[node name="cantuse" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("9_58pvu")
+
+[node name="floorcast" type="RayCast3D" parent="."]
+target_position = Vector3(0, -1.1, 0)

@@ -25,8 +25,7 @@ uv1_triplanar = true
 transparency = 1
 albedo_color = Color(0.8666667, 0.36078432, 0, 0.5921569)
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_ha3uq"]
-size = Vector3(585, 1, 553)
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_h28v8"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_7cbxl"]
 size = Vector3(8, 1, 8)
@@ -216,7 +215,7 @@ material = SubResource("StandardMaterial3D_2nij2")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D3"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 37)
-shape = SubResource("BoxShape3D_ha3uq")
+shape = SubResource("WorldBoundaryShape3D_h28v8")
 
 [node name="CSGBox3D2" type="CSGBox3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -91.5, -27, 91.5)
