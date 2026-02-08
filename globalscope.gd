@@ -16,6 +16,14 @@ var game_wallrun_enabled := true
 
 var DevKit_VersionHistory = {
 	"LATEST":"The latest version of [3D-FPS-Game-Template::UPCOMING]",
+	"a77acf0":"3D basic FPS controller - made it look like hl2 because lmao",
+	"c7aead0":"3D basic FPS controller - infinite double jumps, new trigger framework, and more",
+	"ba4b738":"3D basic FPS controller - devkitgi 2",
+	"acd7e4a":"3D basic FPS controller - devkitgi",
+	"647e2e5":"3D basic FPS controller - devkitgd is cool and all but what about devkitpp",
+	"d81ba3d":"3D basic FPS controller - the third update",
+	"1278dac":"3D basic FPS controller - screw you, title screen update 2",
+	"0fbb9ca":"3D basic FPS controller - screw you, title screen update",
 	"2307eb5":"3D basic FPS controller - Wallrunning toggle update",
 	"14c08d5":"3D basic FPS controller - Wallrunning and level transition patchwork",
 	"4d32e48":"3D basic FPS controller - Extreme version of the ABH-like logic",
@@ -59,4 +67,9 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+	if Input.is_action_just_pressed("fullscreen"):
+		if DisplayServer.window_get_mode() != DisplayServer.WINDOW_MODE_FULLSCREEN:
+			DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
+		else:
+			DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
 	pass
